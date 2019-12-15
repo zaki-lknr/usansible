@@ -1,0 +1,28 @@
+{
+    "manifest_version": 2,
+    "name": "usansible",
+    "version": "0.0.1",
+    "page_action": {
+        "default_title": "ho"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://docs.ansible.com/ansible/*/modules/*"
+            ],
+            "js": [
+                "scripts.js"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "omnibox": {
+        "keyword": "as"
+    },
+    "background": {
+        "scripts": [
+            "background.js"
+        ],
+        "persistent": false
+    }
+}
