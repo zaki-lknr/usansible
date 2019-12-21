@@ -17,7 +17,7 @@ function getBranchName() {
     console.log(v[1]);
     let ver;
     switch (v[1]) {
-    case "debug":
+    case "devel":
         ver = "devel";
         break;
     case "latest":
@@ -55,7 +55,7 @@ function getGitHubUrl(branch) {
         console.log("=== link not found ===");
         return null;
     }
-    console.log(editlink)
+    // console.log(editlink)
 
     let link = editlink.match(/(https:\/\/github\.com\/ansible\/ansible\/edit\/devel\/lib\/ansible\/(?:modules|plugins)\/.*?\.py)\??/)
     // console.log("link: " + link[1]);
