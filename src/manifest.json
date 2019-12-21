@@ -8,7 +8,8 @@
     "content_scripts": [
         {
             "matches": [
-                "https://docs.ansible.com/ansible/*/modules/*"
+                "https://docs.ansible.com/ansible/*/modules/*",
+                "https://docs.ansible.com/ansible/*/plugins/*"
             ],
             "js": [
                 "scripts.js"
