@@ -12,7 +12,7 @@
                 "https://docs.ansible.com/ansible/*/plugins/*"
             ],
             "js": [
-                "scripts.js"
+                "usansible.js"
             ],
             "run_at": "document_end"
         }
