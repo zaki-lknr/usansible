@@ -1,12 +1,13 @@
 let ver = getBranchName();
 let baseurl = getGitHubUrl(ver);
-// [View Source]を差し込むGitHubのリンクテキスト位置を取り出し
-let li = document.getElementsByClassName("wy-breadcrumbs-aside")[0]
 
+if (baseurl) {
+    // [View Source]を差し込むGitHubのリンクテキスト位置を取り出し
+    let li = document.getElementsByClassName("wy-breadcrumbs-aside")[0]
 
-// リンクテキストを差し込み
-li.innerHTML += ' / <a href="' + baseurl + '">View Source</a>'
-
+    // リンクテキストを差し込み
+    li.innerHTML += ' / <a href="' + baseurl + '">View Source</a>'
+}
 
 /**
  * target versionをURLから取り出し、GitHubのbranch名に変換
@@ -14,7 +15,7 @@ li.innerHTML += ' / <a href="' + baseurl + '">View Source</a>'
 function getBranchName() {
     // target versionをURLから取出し
     let v = document.URL.match(/docs\.ansible\.com\/ansible\/(.*?)\/(?:modules|plugins)/);
-    console.log(v[1]);
+    // console.log(v[1]);
     let ver;
     switch (v[1]) {
     case "devel":
@@ -52,7 +53,7 @@ function getGitHubUrl(branch) {
         }
     }
     if (!editlink) {
-        console.log("=== link not found ===");
+        console.log("=== GitHubLink not found ===");
         return null;
     }
     // console.log(editlink)
