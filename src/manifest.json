@@ -2,9 +2,6 @@
     "manifest_version": 2,
     "name": "usansible",
     "version": "0.0.1",
-    "page_action": {
-        "default_title": "ho"
-    },
     "content_scripts": [
         {
             "matches": [
