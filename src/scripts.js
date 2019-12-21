@@ -1,18 +1,4 @@
-// target versionをURLから取出し
-let version = document.URL.match(/docs\.ansible\.com\/ansible\/(.*?)\/modules/);
-console.log(version[1]);
-let ver;
-switch (version[1]) {
-    case "debug":
-        ver = "devel";
-        break;
-    case "latest":
-        ver = "stable-" + document.getElementsByClassName("swiftype")[0].getAttribute('content');
-        break;
-    default:
-        ver = "stable-" + version[1];
-}
-console.log("branch name: " + ver);
+let ver = getBranchName();
 
 // [View Source]を差し込むGitHubのリンクテキスト位置を取り出し
 let li = document.getElementsByClassName("wy-breadcrumbs-aside")[0]
@@ -38,3 +24,26 @@ let baseurl = link[1].replace(/edit\/devel/, "blob/" + ver)
 
 // リンクテキストを差し込み
 li.innerHTML += ' / <a href="' + baseurl + link[2] + '">View Source</a>'
+
+
+/**
+ * target versionをURLから取り出し、GitHubのbranch名に変換
+ */
+function getBranchName() {
+    // target versionをURLから取出し
+    let v = document.URL.match(/docs\.ansible\.com\/ansible\/(.*?)\/modules/);
+    console.log(v[1]);
+    let ver;
+    switch (v[1]) {
+    case "debug":
+        ver = "devel";
+        break;
+    case "latest":
+        ver = "stable-" + document.getElementsByClassName("swiftype")[0].getAttribute('content');
+        break;
+    default:
+        ver = "stable-" + v[1];
+    }
+    console.log("branch name: " + ver);
+    return ver;
+}
