@@ -17,7 +17,8 @@ Chrome拡張として、二つの機能を提供します。
 
 ## Install
 
-TODO: 拡張のインストール方法について書く
+Chromeウェブストアからインストールしてください。  
+[usansible - Chrome ウェブストア](https://chrome.google.com/webstore/detail/usansible/aphgdbhkenbiokjnafmboeagdhjkafee?hl=ja&gl=JP)
 
 ## Licence
 
