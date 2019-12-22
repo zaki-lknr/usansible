@@ -1,7 +1,8 @@
 {
     "manifest_version": 2,
     "name": "usansible",
-    "version": "0.0.1",
+    "version": "1.0.0",
+    "description": "usansible ... support your Ansible Development. this tool provides you with two functions.",
     "icons": {
         "128": "icons/usansible.png"
     },
@@ -18,7 +19,7 @@
         }
     ],
     "omnibox": {
-        "keyword": "as"
+        "keyword": "usa"
     },
     "background": {
         "scripts": [
