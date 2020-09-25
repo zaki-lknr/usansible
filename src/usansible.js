@@ -1,4 +1,6 @@
-let ver = getBranchName();
+let [ver,collection] = getBranchName();
+console.log("branch name: " + ver);
+console.log("collection: " + collection);
 let baseurl = getGitHubUrl(ver);
 
 if (baseurl) {
@@ -14,9 +16,10 @@ if (baseurl) {
  */
 function getBranchName() {
     // target versionをURLから取出し
-    let v = document.URL.match(/docs\.ansible\.com\/ansible\/(.*?)\/(?:modules|plugins)/);
+    let v = document.URL.match(/docs\.ansible\.com\/ansible\/(.*?)\/(modules|plugins|collections)/);
     // console.log(v[1]);
     let ver;
+    let collection = false;
     switch (v[1]) {
     case "devel":
         ver = "devel";
@@ -27,8 +30,15 @@ function getBranchName() {
     default:
         ver = "stable-" + v[1];
     }
-    console.log("branch name: " + ver);
-    return ver;
+    // console.log("branch name: " + ver);
+
+    if (v[2] == "collections") {
+        collection = true;
+    }
+    // console.log("collectoin? " + collection);
+    return [ver, collection];
+    // let result = [ver, collection];
+    // return result;
 }
 
 /**
