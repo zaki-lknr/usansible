@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "usansible",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "usansible ... support your Ansible Development. this tool provides you with two functions.",
     "icons": {
         "128": "icons/usansible.png"
