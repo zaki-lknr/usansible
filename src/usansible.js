@@ -1,6 +1,6 @@
 let [ver,collection] = getBranchName();
-console.log("branch name: " + ver);
-console.log("collection: " + collection);
+// console.log("branch name: " + ver);
+// console.log("collection: " + collection);
 let baseurl = getGitHubUrl(ver);
 
 if (collection) {
@@ -77,7 +77,7 @@ function getGitHubUrl(branch) {
         }
     }
     if (!editlink) {
-        console.log("=== GitHubLink not found ===");
+        // console.log("=== GitHubLink not found ===");
         return null;
     }
     // console.log(editlink)
@@ -91,10 +91,10 @@ function getCollectionUrl(branch) {
     // URLの検査再び
     let m = document.URL.match(/docs\.ansible\.com\/ansible\/(?:.*?)\/collections\/(.*?)\/(.*?)\/(.*)_(.*).html/);
     if (m) {
-        console.log("m1: " + m[1]);
-        console.log("m2: " + m[2]);
-        console.log("m3: " + m[3]);
-        console.log("m4: " + m[4]);
+        // console.log("m1: " + m[1]);
+        // console.log("m2: " + m[2]);
+        // console.log("m3: " + m[3]);
+        // console.log("m4: " + m[4]);
 
         if ((m[1]+'.'+m[2]) === 'ansible.builtin') {
             let github_link;
@@ -110,7 +110,6 @@ function getCollectionUrl(branch) {
             default:
                 // module以外はパス名そのまま
                 github_link = 'https://github.com/ansible/ansible/blob/' + branch + '/lib/ansible/plugins/'+ m[4] +'/' + m[3] + '.py';
-                console.log("link: " + github_link);
                 break;
             }
 
