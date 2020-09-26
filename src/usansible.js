@@ -89,18 +89,25 @@ function getGitHubUrl(branch) {
 
 function getCollectionUrl(branch) {
     // URLの検査再び
-    let m = document.URL.match(/docs\.ansible\.com\/ansible\/(?:.*?)\/collections\/(.*?)\/(.*?)\/(.*)_module.html/);
+    let m = document.URL.match(/docs\.ansible\.com\/ansible\/(?:.*?)\/collections\/(.*?)\/(.*?)\/(.*)_(.*).html/);
     if (m) {
         console.log("m1: " + m[1]);
         console.log("m2: " + m[2]);
         console.log("m3: " + m[3]);
+        console.log("m4: " + m[4]);
 
         if ((m[1]+'.'+m[2]) === 'ansible.builtin') {
-            // baseのモジュール類のURL
-            // 例えばtemplate module
-            // https://docs.ansible.com/ansible/latest/collections/ansible/builtin/template_module.html
-            // https://github.com/ansible/ansible/blob/stable-2.10/lib/ansible/modules/template.py
-            let github_link = 'https://github.com/ansible/ansible/blob/' + branch + '/lib/ansible/modules/' + m[3] + '.py';
+            let github_link;
+            switch (m[4]) {
+            case 'module':
+                // baseのモジュール類のURL
+                // 例えばtemplate module
+                // https://docs.ansible.com/ansible/latest/collections/ansible/builtin/template_module.html
+                // https://github.com/ansible/ansible/blob/stable-2.10/lib/ansible/modules/template.py
+                github_link = 'https://github.com/ansible/ansible/blob/' + branch + '/lib/ansible/modules/' + m[3] + '.py';
+                // "module" -> "modules" (sが増えてる)
+                break;
+            }
 
             return github_link;
         }
