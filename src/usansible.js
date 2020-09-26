@@ -85,12 +85,15 @@ function getCollectionUrl(branch) {
         console.log("m2: " + m[2]);
         console.log("m3: " + m[3]);
 
-        // 例えばtemplate module
-        // https://docs.ansible.com/ansible/latest/collections/ansible/builtin/template_module.html
-        // https://github.com/ansible/ansible/blob/stable-2.10/lib/ansible/modules/template.py
-        let github_link = 'https://github.com/ansible/ansible/blob/' + branch + '/lib/ansible/modules/' + m[3] + '.py';
+        if ((m[1]+'.'+m[2]) === 'ansible.builtin') {
+            // baseのモジュール類のURL
+            // 例えばtemplate module
+            // https://docs.ansible.com/ansible/latest/collections/ansible/builtin/template_module.html
+            // https://github.com/ansible/ansible/blob/stable-2.10/lib/ansible/modules/template.py
+            let github_link = 'https://github.com/ansible/ansible/blob/' + branch + '/lib/ansible/modules/' + m[3] + '.py';
 
-        return github_link;
+            return github_link;
+        }
     }
 
     return null;
