@@ -1,7 +1,14 @@
 let [ver,collection] = getBranchName();
 console.log("branch name: " + ver);
 console.log("collection: " + collection);
-let baseurl = getGitHubUrl(ver);
+let baseurl;
+
+if (collection) {
+    getCollectionUrl(ver);
+}
+else {
+    baseurl = getGitHubUrl(ver);
+}
 
 if (baseurl) {
     // [View Source]を差し込むGitHubのリンクテキスト位置を取り出し
@@ -71,4 +78,18 @@ function getGitHubUrl(branch) {
     let link = editlink.match(/(https:\/\/github\.com\/ansible\/ansible\/edit\/devel\/lib\/ansible\/(?:modules|plugins)\/.*?\.py)\??/)
     // console.log("link: " + link[1]);
     return link[1].replace(/edit\/devel/, "blob/" + branch);
+}
+
+function getCollectionUrl(branch) {
+    console.log("getCollectionUrl() begin");
+
+    let note = document.getElementsByClassName("admonition note");
+    console.log("note: " + note);
+
+    Array.prototype.forEach.call(note, function(item) {
+        // itemを利用した処理
+        console.log("item: " + item.innerHTML);
+        let z = item.getElementsByClassName("pre");
+        console.log("z: " + z);
+    });
 }
