@@ -133,6 +133,10 @@ function getCollectionUrl(branch) {
                 github_link = 'https://github.com/ansible-collections/'+ m[1] + '.' + m[2] +'/blob/main/plugins/modules/' + m[3] + '.py';
                 // "module" -> "modules" (sが増えてる)
                 break;
+            default:
+                // module以外はパス名そのまま
+                github_link = 'https://github.com/ansible-collections/'+ m[1] + '.' + m[2] +'/blob/main/plugins/'+ m[4] +'/' + m[3] + '.py';
+                break;
             }
 
             return github_link;
