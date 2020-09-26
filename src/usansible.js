@@ -17,6 +17,11 @@ if (baseurl) {
         // リンクテキストを差し込み
         li.innerHTML += ' / <a href="' + baseurl + '">View Source</a>'
     }
+    else {
+        // <a>で終わっていない -> Edit on GitHubがない(現状コメントアウトされて<br>になっている)
+        // 単体のリンクテキスト差し込み
+        li.innerHTML += '<a class="fa fa-github" href="' + baseurl + '"> View Source</a>'
+    }
 
 }
 
