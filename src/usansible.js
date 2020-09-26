@@ -59,7 +59,7 @@ function getBranchName() {
 }
 
 /**
- * GitHubのソースのURLを取得する
+ * GitHubのソースのURLを取得する(旧ページ構成)
  */
 function getGitHubUrl(branch) {
     // ページ上部の[Edit on GitHub]の位置からソースのURL取得、モジュールは良いがプラグインが同じやり方だとリンク取得できない。
@@ -90,8 +90,11 @@ function getGitHubUrl(branch) {
     return link[1].replace(/edit\/devel/, "blob/" + branch);
 }
 
+/**
+ * GitHubのソースのURLを取得する(コレクション関連)
+ */
 function getCollectionUrl(branch) {
-    // URLの検査再び
+    // URLの検査再び(この関数が呼ばれるのはコレクションのURLであることが確定済みのあと)
     let m = document.URL.match(/docs\.ansible\.com\/ansible\/(?:.*?)\/collections\/(.*?)\/(.*?)\/(.*)_(.*).html/);
     if (m) {
         // console.log("m1: " + m[1]);
