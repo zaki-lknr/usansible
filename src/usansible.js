@@ -10,9 +10,14 @@ if (collection) {
 if (baseurl) {
     // [View Source]を差し込むGitHubのリンクテキスト位置を取り出し
     let li = document.getElementsByClassName("wy-breadcrumbs-aside")[0]
+    // console.log("innerhtml: " + li.innerHTML);
 
-    // リンクテキストを差し込み
-    li.innerHTML += ' / <a href="' + baseurl + '">View Source</a>'
+    if (li.innerHTML.match(/<\/a>\s*$/)) {
+        // <a>の閉じタグで終わる -> Edit on GitHubがある旧スタイル
+        // リンクテキストを差し込み
+        li.innerHTML += ' / <a href="' + baseurl + '">View Source</a>'
+    }
+
 }
 
 /**
