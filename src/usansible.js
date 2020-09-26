@@ -103,6 +103,7 @@ function getCollectionUrl(branch) {
         // console.log("m4: " + m[4]);
 
         if ((m[1]+'.'+m[2]) === 'ansible.builtin') {
+            // coreモジュール(base / builtin)の場合
             let github_link;
             switch (m[4]) {
             case 'module':
@@ -116,6 +117,21 @@ function getCollectionUrl(branch) {
             default:
                 // module以外はパス名そのまま
                 github_link = 'https://github.com/ansible/ansible/blob/' + branch + '/lib/ansible/plugins/'+ m[4] +'/' + m[3] + '.py';
+                break;
+            }
+
+            return github_link;
+        }
+        else {
+            let github_link;
+            switch (m[4]) {
+            case 'module':
+                // collectionのモジュール類のURL
+                // 例えばansible.posix.firewalld module
+                // https://docs.ansible.com/ansible/latest/collections/ansible/posix/firewalld_module.html
+                // https://github.com/ansible-collections/ansible.posix/blob/main/plugins/modules/firewalld.py
+                github_link = 'https://github.com/ansible-collections/'+ m[1] + '.' + m[2] +'/blob/main/plugins/modules/' + m[3] + '.py';
+                // "module" -> "modules" (sが増えてる)
                 break;
             }
 
