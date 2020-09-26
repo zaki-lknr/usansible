@@ -1,10 +1,13 @@
 let [ver,collection] = getBranchName();
 // console.log("branch name: " + ver);
 // console.log("collection: " + collection);
-let baseurl = getGitHubUrl(ver);
+let baseurl;
 
 if (collection) {
     baseurl = getCollectionUrl(ver);
+}
+else {
+    baseurl = getGitHubUrl(ver);
 }
 
 if (baseurl) {
