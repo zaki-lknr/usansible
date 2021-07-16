@@ -29,6 +29,30 @@ if (baseurl) {
 }
 
 /**
+ * バージョン変換テーブル
+ *
+ * @param {*} version
+ * @returns 変換後バージョン
+ */
+function ansible_version_table(version) {
+    let ver;
+    switch (version) {
+    case "3":
+        ver = "2.10";
+        break;
+    case "4":
+        ver = "2.11";
+        break;
+    default:
+        ver = version;
+        break;
+    }
+    console.log("version: " + ver);
+
+    return ver;
+}
+
+/**
  * target versionをURLから取り出し、GitHubのbranch名に変換
  */
 function getBranchName() {
@@ -42,10 +66,10 @@ function getBranchName() {
         ver = "devel";
         break;
     case "latest":
-        ver = "stable-" + document.getElementsByClassName("swiftype")[0].getAttribute('content');
+        ver = "stable-" + ansible_version_table(document.getElementsByClassName("swiftype")[0].getAttribute('content'));
         break;
     default:
-        ver = "stable-" + v[1];
+        ver = "stable-" + ansible_version_table(v[1]);
     }
     // console.log("branch name: " + ver);
 
