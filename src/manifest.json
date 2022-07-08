@@ -1,5 +1,5 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "usansible",
     "version": "1.6.0",
     "description": "usansible ... support your Ansible Development. this tool provides you with two functions.",
@@ -23,9 +23,6 @@
         "keyword": "usa"
     },
     "background": {
-        "scripts": [
-            "background.js"
-        ],
-        "persistent": false
+        "service_worker": "background.js"
     }
 }
