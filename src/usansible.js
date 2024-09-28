@@ -61,6 +61,9 @@ function ansible_version_table(version) {
     case "10":
         ver = "2.17";
         break;
+    case "11":
+        ver = "2.18";
+        break;
     default:
         ver = version;
         break;
