@@ -90,7 +90,14 @@ function getBranchName() {
         ver = "devel";
         break;
     case "latest":
-        ver = "stable-" + ansible_version_table(document.getElementsByClassName("swiftype")[0].getAttribute('content'));
+        // console.log("url: latest");
+        const ver_list = document.getElementById('version-list');
+        // バージョン選択ドロップメニュー内の1個前のバージョン番号値+1を現バージョンとする
+        /// ※「latest」「番号」「devel」の前提
+        // const version = Array.from(ver_list.options).find((elem) => typeof(elem) === 'number');  // 全てstring
+        const version = Number(Array.from(ver_list.options).find((elem) => Number(elem.value)).value) + 1;
+        // console.log(version);
+        ver = "stable-" + ansible_version_table(String(version));
         break;
     default:
         ver = "stable-" + ansible_version_table(v[1]);
