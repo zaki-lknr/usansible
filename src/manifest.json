@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "usansible",
-    "version": "1.12.0",
+    "version": "1.12.1",
     "description": "usansible ... support your Ansible Development. this tool provides you with two functions.",
     "icons": {
         "128": "icons/usansible.png"
@@ -9,9 +9,9 @@
     "content_scripts": [
         {
             "matches": [
-                "https://docs.ansible.com/ansible/*/modules/*",
-                "https://docs.ansible.com/ansible/*/plugins/*",
-                "https://docs.ansible.com/ansible/*/collections/*"
+                "https://docs.ansible.com/projects/ansible/*/modules/*",
+                "https://docs.ansible.com/projects/ansible/*/plugins/*",
+                "https://docs.ansible.com/projects/ansible/*/collections/*"
             ],
             "js": [
                 "usansible.js"
