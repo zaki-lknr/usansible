@@ -81,7 +81,7 @@ function ansible_version_table(version) {
  */
 function getBranchName() {
     // target versionをURLから取出し
-    let v = document.URL.match(/docs\.ansible\.com\/ansible\/(.*?)\/(modules|plugins|collections)/);
+    let v = document.URL.match(/docs\.ansible\.com\/projects\/ansible\/(.*?)\/(modules|plugins|collections)/);
     // console.log(v[1]);
     let ver;
     let collection = false;
@@ -140,7 +140,7 @@ function getGitHubUrl(branch) {
     }
     // console.log(editlink)
 
-    let link = editlink.match(/(https:\/\/github\.com\/ansible\/ansible\/edit\/devel\/lib\/ansible\/(?:modules|plugins)\/.*?\.py)\??/)
+    let link = editlink.match(/(https:\/\/github\.com\/ansible\/projects\/ansible\/edit\/devel\/lib\/ansible\/(?:modules|plugins)\/.*?\.py)\??/)
     // console.log("link: " + link[1]);
     return link[1].replace(/edit\/devel/, "blob/" + branch);
 }
@@ -150,7 +150,7 @@ function getGitHubUrl(branch) {
  */
 function getCollectionUrl(branch) {
     // URLの検査再び(この関数が呼ばれるのはコレクションのURLであることが確定済みのあと)
-    let m = document.URL.match(/docs\.ansible\.com\/ansible\/(?:.*?)\/collections\/(.*?)\/(.*?)\/(.*)_(.*).html/);
+    let m = document.URL.match(/docs\.ansible\.com\/projects\/ansible\/(?:.*?)\/collections\/(.*?)\/(.*?)\/(.*)_(.*).html/);
     if (m) {
         // console.log("m1: " + m[1]);
         // console.log("m2: " + m[2]);
