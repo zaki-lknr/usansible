@@ -86,15 +86,6 @@ function ansible_version_table(version) {
  * target versionをURLから取り出し、GitHubのbranch名に変換
  */
 function getBranchName() {
-    const flyout = document.querySelector("readthedocs-flyout");
-    const shadow = flyout.shadowRoot;
-    console.log(shadow);
-    const versions = [...shadow.querySelectorAll("dl.versions a")]
-        .map(a => ({
-            version: a.textContent.trim(),
-            url: a.href
-        }));
-    console.log(versions);
     // target versionをURLから取出し
     let v = document.URL.match(/docs\.ansible\.com\/projects\/ansible\/(.*?)\/(modules|plugins|collections)/);
     // console.log(v[1]);
@@ -106,11 +97,12 @@ function getBranchName() {
         break;
     case "latest":
         // console.log("url: latest");
-        const ver_list = document.getElementById('version-list');
-        // バージョン選択ドロップメニュー内の1個前のバージョン番号値+1を現バージョンとする
+        const flyout = document.querySelector("readthedocs-flyout");
+        const shadow = flyout.shadowRoot;
+        const versions = [...shadow.querySelectorAll("dl.versions a")].map(a => (a.textContent.trim()));
+        // 画面右下部分バージョン選択画面内の1個前のバージョン番号値を現バージョンとする
         /// ※「latest」「番号」「devel」の前提
-        // const version = Array.from(ver_list.options).find((elem) => typeof(elem) === 'number');  // 全てstring
-        const version = Number(Array.from(ver_list.options).find((elem) => Number(elem.value)).value) + 1;
+        const version = versions.find((elem) => Number(elem));
         // console.log(version);
         ver = "stable-" + ansible_version_table(String(version));
         break;
