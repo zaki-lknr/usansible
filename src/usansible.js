@@ -86,6 +86,15 @@ function ansible_version_table(version) {
  * target versionをURLから取り出し、GitHubのbranch名に変換
  */
 function getBranchName() {
+    const flyout = document.querySelector("readthedocs-flyout");
+    const shadow = flyout.shadowRoot;
+    console.log(shadow);
+    const versions = [...shadow.querySelectorAll("dl.versions a")]
+        .map(a => ({
+            version: a.textContent.trim(),
+            url: a.href
+        }));
+    console.log(versions);
     // target versionをURLから取出し
     let v = document.URL.match(/docs\.ansible\.com\/projects\/ansible\/(.*?)\/(modules|plugins|collections)/);
     // console.log(v[1]);
