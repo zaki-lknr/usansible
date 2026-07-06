@@ -1,31 +1,35 @@
-let [ver,collection] = getBranchName();
-// console.log("branch name: " + ver);
-// console.log("collection: " + collection);
-let baseurl;
+main();
 
-if (collection) {
-    baseurl = getCollectionUrl(ver);
-}
-else {
-    baseurl = getGitHubUrl(ver);
-}
+function main() {
+    let [ver,collection] = getBranchName();
+    // console.log("branch name: " + ver);
+    // console.log("collection: " + collection);
+    let baseurl;
 
-if (baseurl) {
-    // [View Source]を差し込むGitHubのリンクテキスト位置を取り出し
-    let li = document.getElementsByClassName("wy-breadcrumbs-aside")[0]
-    // console.log("innerhtml: " + li.innerHTML);
-
-    if (li.innerHTML.match(/<\/a>\s*$/)) {
-        // <a>の閉じタグで終わる -> Edit on GitHubがある旧スタイル
-        // リンクテキストを差し込み
-        li.innerHTML += ' / <a href="' + baseurl + '">View Source</a>'
+    if (collection) {
+        baseurl = getCollectionUrl(ver);
     }
     else {
-        // <a>で終わっていない -> Edit on GitHubがない(現状コメントアウトされて<br>になっている)
-        // 単体のリンクテキスト差し込み
-        li.innerHTML += '<a class="fa fa-github" href="' + baseurl + '"> View Source</a>'
+        baseurl = getGitHubUrl(ver);
     }
 
+    if (baseurl) {
+        // [View Source]を差し込むGitHubのリンクテキスト位置を取り出し
+        let li = document.getElementsByClassName("wy-breadcrumbs-aside")[0]
+        // console.log("innerhtml: " + li.innerHTML);
+
+        if (li.innerHTML.match(/<\/a>\s*$/)) {
+            // <a>の閉じタグで終わる -> Edit on GitHubがある旧スタイル
+            // リンクテキストを差し込み
+            li.innerHTML += ' / <a href="' + baseurl + '">View Source</a>'
+        }
+        else {
+            // <a>で終わっていない -> Edit on GitHubがない(現状コメントアウトされて<br>になっている)
+            // 単体のリンクテキスト差し込み
+            li.innerHTML += '<a class="fa fa-github" href="' + baseurl + '"> View Source</a>'
+        }
+
+    }
 }
 
 /**
