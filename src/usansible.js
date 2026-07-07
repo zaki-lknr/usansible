@@ -1,5 +1,5 @@
 const main = () => {
-    let [ver,collection] = getBranchName();
+    const [ver,collection] = getBranchName();
     // console.log("branch name: " + ver);
     // console.log("collection: " + collection);
     let baseurl;
@@ -13,7 +13,7 @@ const main = () => {
 
     if (baseurl) {
         // [View Source]を差し込むGitHubのリンクテキスト位置を取り出し
-        let li = document.getElementsByClassName("wy-breadcrumbs-aside")[0]
+        const li = document.getElementsByClassName("wy-breadcrumbs-aside")[0]
         // console.log("innerhtml: " + li.innerHTML);
 
         if (li.innerHTML.match(/<\/a>\s*$/)) {
@@ -89,7 +89,7 @@ const ansible_version_table = (version) => {
  */
 const getBranchName = () => {
     // target versionをURLから取出し
-    let v = document.URL.match(/docs\.ansible\.com\/projects\/ansible\/(.*?)\/(modules|plugins|collections)/);
+    const v = document.URL.match(/docs\.ansible\.com\/projects\/ansible\/(.*?)\/(modules|plugins|collections)/);
     // console.log(v[1]);
     let ver;
     let collection = false;
@@ -131,12 +131,12 @@ const getGitHubUrl = (branch) => {
     // ページ上部の[Edit on GitHub]の位置からソースのURL取得、モジュールは良いがプラグインが同じやり方だとリンク取得できない。
     // よってページ下部の[!]Hintの項目内にある"edit this document"のリンクから取得する。
     let editlink;
-    let external_links = document.getElementsByClassName("external");
+    const external_links = document.getElementsByClassName("external");
     if (external_links) {
         // console.log(external_links);
         // HTMLCollectionで配列メソッドを使う | ハックノート
         // https://hacknote.jp/archives/21892/
-        let l = Array.prototype.slice.call(external_links).filter(o => o.getAttribute("href").match(/^https:\/\/github.*\/devel\/lib\/.*\.py\??/))
+        const l = Array.prototype.slice.call(external_links).filter(o => o.getAttribute("href").match(/^https:\/\/github.*\/devel\/lib\/.*\.py\??/))
         // foobar.pyのあとに"?..."がないリンクもあるので注意
         //https://docs.ansible.com/ansible/2.7/plugins/callback/yaml.html
         // console.log("link: " + l);
@@ -151,7 +151,7 @@ const getGitHubUrl = (branch) => {
     }
     // console.log(editlink)
 
-    let link = editlink.match(/(https:\/\/github\.com\/ansible\/projects\/ansible\/edit\/devel\/lib\/ansible\/(?:modules|plugins)\/.*?\.py)\??/)
+    const link = editlink.match(/(https:\/\/github\.com\/ansible\/projects\/ansible\/edit\/devel\/lib\/ansible\/(?:modules|plugins)\/.*?\.py)\??/)
     // console.log("link: " + link[1]);
     return link[1].replace(/edit\/devel/, "blob/" + branch);
 }
@@ -161,7 +161,7 @@ const getGitHubUrl = (branch) => {
  */
 const getCollectionUrl = (branch) => {
     // URLの検査再び(この関数が呼ばれるのはコレクションのURLであることが確定済みのあと)
-    let m = document.URL.match(/docs\.ansible\.com\/projects\/ansible\/(?:.*?)\/collections\/(.*?)\/(.*?)\/(.*)_(.*).html/);
+    const m = document.URL.match(/docs\.ansible\.com\/projects\/ansible\/(?:.*?)\/collections\/(.*?)\/(.*?)\/(.*)_(.*).html/);
     if (m) {
         // console.log("m1: " + m[1]);
         // console.log("m2: " + m[2]);
