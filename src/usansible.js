@@ -30,48 +30,36 @@ const main = () => {
  * @returns 変換後バージョン
  */
 const ansible_version_table = (version) => {
-    let ver;
-    switch (version) {
-    case "3":
-        ver = "2.10";
-        break;
-    case "4":
-        ver = "2.11";
-        break;
-    case "5":
-        ver = "2.12";
-        break;
-    case "6":
-        ver = "2.13";
-        break;
-    case "7":
-        ver = "2.14";
-        break;
-    case "8":
-        ver = "2.15";
-        break;
-    case "9":
-        ver = "2.16";
-        break;
-    case "10":
-        ver = "2.17";
-        break;
-    case "11":
-        ver = "2.18";
-        break;
-    case "12":
-        ver = "2.19";
-        break;
-    case "13":
-        ver = "2.20";
-        break;
-    case "14":
-        ver = "2.21";
-        break;
-    default:
-        ver = version;
-        break;
-    }
+    const ver = ((v) => {
+        switch (v) {
+        case "3":
+            return "2.10";
+        case "4":
+            return "2.11";
+        case "5":
+            return "2.12";
+        case "6":
+            return "2.13";
+        case "7":
+            return "2.14";
+        case "8":
+            return "2.15";
+        case "9":
+            return "2.16";
+        case "10":
+            return "2.17";
+        case "11":
+            return "2.18";
+        case "12":
+            return "2.19";
+        case "13":
+            return "2.20";
+        case "14":
+            return "2.21";
+        default:
+            return v;
+        }
+    })(version);
     console.log("version: " + ver);
 
     return ver;
