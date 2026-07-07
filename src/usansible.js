@@ -1,6 +1,4 @@
-main();
-
-function main() {
+const main = () => {
     let [ver,collection] = getBranchName();
     // console.log("branch name: " + ver);
     // console.log("collection: " + collection);
@@ -244,3 +242,5 @@ function waitForFlyout() {
         });
     });
 }
+
+main();
