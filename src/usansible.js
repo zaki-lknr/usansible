@@ -100,15 +100,17 @@ function getBranchName() {
         ver = "devel";
         break;
     case "latest":
-        // console.log("url: latest");
-        const flyout = document.querySelector("readthedocs-flyout");
-        const shadow = flyout.shadowRoot;
-        const versions = [...shadow.querySelectorAll("dl.versions a")].map(a => (a.textContent.trim()));
-        // 画面右下部分バージョン選択画面内の1個前のバージョン番号値を現バージョンとする
-        /// ※「latest」「番号」「devel」の前提
-        const version = versions.find((elem) => Number(elem));
-        // console.log(version);
-        ver = "stable-" + ansible_version_table(String(version));
+        (async () => {
+            // console.log("url: latest");
+            const flyout = await waitForFlyout();
+            const shadow = flyout.shadowRoot;
+            const versions = [...shadow.querySelectorAll("dl.versions a")].map(a => (a.textContent.trim()));
+            // 画面右下部分バージョン選択画面内の1個前のバージョン番号値を現バージョンとする
+            /// ※「latest」「番号」「devel」の前提
+            const version = versions.find((elem) => Number(elem));
+            // console.log(version);
+            ver = "stable-" + ansible_version_table(String(version));
+        })();
         break;
     default:
         ver = "stable-" + ansible_version_table(v[1]);
@@ -210,4 +212,35 @@ function getCollectionUrl(branch) {
     }
 
     return null;
+}
+
+/**
+ * readthedocs-flyout elementの取得
+ * DOMに追加されるまで待機して要素を返す
+ *
+ * @returns readthedocs-flyout element
+ */
+function waitForFlyout() {
+    return new Promise(resolve => {
+        // すでに存在するなら即返す
+        const flyout = document.querySelector("readthedocs-flyout");
+        if (flyout) {
+            resolve(flyout);
+            return;
+        }
+
+        // console.log("wait added to DOM");
+        const observer = new MutationObserver(() => {
+            const flyout = document.querySelector("readthedocs-flyout");
+            if (flyout) {
+                observer.disconnect();
+                resolve(flyout);
+            }
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+        });
+    });
 }
