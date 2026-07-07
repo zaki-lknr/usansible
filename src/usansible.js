@@ -2,14 +2,7 @@ const main = () => {
     const [ver,collection] = getBranchName();
     // console.log("branch name: " + ver);
     // console.log("collection: " + collection);
-    let baseurl;
-
-    if (collection) {
-        baseurl = getCollectionUrl(ver);
-    }
-    else {
-        baseurl = getGitHubUrl(ver);
-    }
+    const baseurl = collection? getCollectionUrl(ver): getGitHubUrl(ver);
 
     if (baseurl) {
         // [View Source]を差し込むGitHubのリンクテキスト位置を取り出し
@@ -92,7 +85,7 @@ const getBranchName = () => {
     const v = document.URL.match(/docs\.ansible\.com\/projects\/ansible\/(.*?)\/(modules|plugins|collections)/);
     // console.log(v[1]);
     let ver;
-    let collection = false;
+    const collection = (v[2] == "collections")? true: false;
     switch (v[1]) {
     case "devel":
         ver = "devel";
@@ -115,10 +108,6 @@ const getBranchName = () => {
     }
     // console.log("branch name: " + ver);
 
-    if (v[2] == "collections") {
-        collection = true;
-    }
-    // console.log("collectoin? " + collection);
     return [ver, collection];
     // let result = [ver, collection];
     // return result;
