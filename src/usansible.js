@@ -36,7 +36,7 @@ const main = () => {
  * @param {*} version
  * @returns 変換後バージョン
  */
-function ansible_version_table(version) {
+const ansible_version_table = (version) => {
     let ver;
     switch (version) {
     case "3":
@@ -87,7 +87,7 @@ function ansible_version_table(version) {
 /**
  * target versionをURLから取り出し、GitHubのbranch名に変換
  */
-function getBranchName() {
+const getBranchName = () => {
     // target versionをURLから取出し
     let v = document.URL.match(/docs\.ansible\.com\/projects\/ansible\/(.*?)\/(modules|plugins|collections)/);
     // console.log(v[1]);
@@ -127,7 +127,7 @@ function getBranchName() {
 /**
  * GitHubのソースのURLを取得する(旧ページ構成)
  */
-function getGitHubUrl(branch) {
+const getGitHubUrl = (branch) => {
     // ページ上部の[Edit on GitHub]の位置からソースのURL取得、モジュールは良いがプラグインが同じやり方だとリンク取得できない。
     // よってページ下部の[!]Hintの項目内にある"edit this document"のリンクから取得する。
     let editlink;
@@ -159,7 +159,7 @@ function getGitHubUrl(branch) {
 /**
  * GitHubのソースのURLを取得する(コレクション関連)
  */
-function getCollectionUrl(branch) {
+const getCollectionUrl = (branch) => {
     // URLの検査再び(この関数が呼ばれるのはコレクションのURLであることが確定済みのあと)
     let m = document.URL.match(/docs\.ansible\.com\/projects\/ansible\/(?:.*?)\/collections\/(.*?)\/(.*?)\/(.*)_(.*).html/);
     if (m) {
@@ -218,7 +218,7 @@ function getCollectionUrl(branch) {
  *
  * @returns readthedocs-flyout element
  */
-function waitForFlyout() {
+const waitForFlyout = () => {
     return new Promise(resolve => {
         // すでに存在するなら即返す
         const flyout = document.querySelector("readthedocs-flyout");
