@@ -104,7 +104,6 @@ const getBranchName = () => {
 const getGitHubUrl = (branch) => {
     // ページ上部の[Edit on GitHub]の位置からソースのURL取得、モジュールは良いがプラグインが同じやり方だとリンク取得できない。
     // よってページ下部の[!]Hintの項目内にある"edit this document"のリンクから取得する。
-    let editlink;
     const external_links = document.getElementsByClassName("external");
     if (external_links) {
         // console.log(external_links);
@@ -116,18 +115,17 @@ const getGitHubUrl = (branch) => {
         // console.log("link: " + l);
 
         if (l.length) {
-            editlink = l[0].getAttribute("href");
+            const editlink = l[0].getAttribute("href");
+            // console.log(editlink)
+            if (editlink) {
+                const link = editlink.match(/(https:\/\/github\.com\/ansible\/projects\/ansible\/edit\/devel\/lib\/ansible\/(?:modules|plugins)\/.*?\.py)\??/)
+                // console.log("link: " + link[1]);
+                return link[1].replace(/edit\/devel/, "blob/" + branch);
+            }
         }
     }
-    if (!editlink) {
-        // console.log("=== GitHubLink not found ===");
-        return null;
-    }
-    // console.log(editlink)
-
-    const link = editlink.match(/(https:\/\/github\.com\/ansible\/projects\/ansible\/edit\/devel\/lib\/ansible\/(?:modules|plugins)\/.*?\.py)\??/)
-    // console.log("link: " + link[1]);
-    return link[1].replace(/edit\/devel/, "blob/" + branch);
+    // console.log("=== GitHubLink not found ===");
+    return null;
 }
 
 /**
