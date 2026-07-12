@@ -144,42 +144,32 @@ const getCollectionUrl = (branch) => {
 
         if ((m[1]+'.'+m[2]) === 'ansible.builtin') {
             // coreモジュール(base / builtin)の場合
-            let github_link;
             switch (m[4]) {
             case 'module':
                 // baseのモジュール類のURL
                 // 例えばtemplate module
                 // https://docs.ansible.com/ansible/latest/collections/ansible/builtin/template_module.html
                 // https://github.com/ansible/ansible/blob/stable-2.10/lib/ansible/modules/template.py
-                github_link = 'https://github.com/ansible/ansible/blob/' + branch + '/lib/ansible/modules/' + m[3] + '.py';
+                return 'https://github.com/ansible/ansible/blob/' + branch + '/lib/ansible/modules/' + m[3] + '.py';
                 // "module" -> "modules" (sが増えてる)
-                break;
             default:
                 // module以外はパス名そのまま
-                github_link = 'https://github.com/ansible/ansible/blob/' + branch + '/lib/ansible/plugins/'+ m[4] +'/' + m[3] + '.py';
-                break;
+                return 'https://github.com/ansible/ansible/blob/' + branch + '/lib/ansible/plugins/'+ m[4] +'/' + m[3] + '.py';
             }
-
-            return github_link;
         }
         else {
-            let github_link;
             switch (m[4]) {
             case 'module':
                 // collectionのモジュール類のURL
                 // 例えばansible.posix.firewalld module
                 // https://docs.ansible.com/ansible/latest/collections/ansible/posix/firewalld_module.html
                 // https://github.com/ansible-collections/ansible.posix/blob/main/plugins/modules/firewalld.py
-                github_link = 'https://github.com/ansible-collections/'+ m[1] + '.' + m[2] +'/blob/main/plugins/modules/' + m[3] + '.py';
+                return 'https://github.com/ansible-collections/'+ m[1] + '.' + m[2] +'/blob/main/plugins/modules/' + m[3] + '.py';
                 // "module" -> "modules" (sが増えてる)
-                break;
             default:
                 // module以外はパス名そのまま
-                github_link = 'https://github.com/ansible-collections/'+ m[1] + '.' + m[2] +'/blob/main/plugins/'+ m[4] +'/' + m[3] + '.py';
-                break;
+                return 'https://github.com/ansible-collections/'+ m[1] + '.' + m[2] +'/blob/main/plugins/'+ m[4] +'/' + m[3] + '.py';
             }
-
-            return github_link;
         }
     }
 
