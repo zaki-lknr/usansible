@@ -67,35 +67,31 @@ const getBranchName = () => {
     // target versionをURLから取出し
     const v = document.URL.match(/docs\.ansible\.com\/projects\/ansible\/(.*?)\/(modules|plugins|collections)/);
     // console.log(v[1]);
-    let ver;
     const collection = (v[2] == "collections")? true: false;
-    switch (v[1]) {
-    case "devel":
-        ver = "devel";
-        break;
-    case "latest":
-        (async () => {
-            // console.log("url: latest");
-            const flyout = await waitForFlyout();
-            const shadow = flyout.shadowRoot;
-            const versions = [...shadow.querySelectorAll("dl.versions a")].map(a => (a.textContent.trim()));
-            // 画面右下部分バージョン選択画面内の1個前のバージョン番号値を現バージョンとする
-            /// ※「latest」「番号」「devel」の前提
-            const version = versions.find((elem) => Number(elem));
-            // console.log(version);
-            ver = "stable-" + ansible_version_table(String(version));
-            console.log(ver);
-        })();
-        break;
-    default:
-        ver = "stable-" + ansible_version_table(v[1]);
-        console.log(ver);
-    }
+    const ver = (() => {
+        switch (v[1]) {
+        case "devel":
+            return "devel";
+        case "latest":
+            return (async () => {
+                // console.log("url: latest");
+                const flyout = await waitForFlyout();
+                const shadow = flyout.shadowRoot;
+                const versions = [...shadow.querySelectorAll("dl.versions a")].map(a => (a.textContent.trim()));
+                // 画面右下部分バージョン選択画面内の1個前のバージョン番号値を現バージョンとする
+                /// ※「latest」「番号」「devel」の前提
+                const version = versions.find((elem) => Number(elem));
+                // console.log(version);
+                return "stable-" + ansible_version_table(String(version));
+                // console.log(ver);
+            })();
+        default:
+            return "stable-" + ansible_version_table(v[1]);
+        }
+    })();
     // console.log("branch name: " + ver);
 
     return [ver, collection];
-    // let result = [ver, collection];
-    // return result;
 }
 
 /**
