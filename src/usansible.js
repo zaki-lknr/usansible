@@ -1,5 +1,5 @@
-const main = () => {
-    const [ver,collection] = getBranchName();
+const main = async () => {
+    const [ver,collection] = await getBranchName();
     // console.log("branch name: " + ver);
     // console.log("collection: " + collection);
     const baseurl = collection? getCollectionUrl(ver): getGitHubUrl(ver);
@@ -63,28 +63,26 @@ const ansible_version_table = (version) => {
 /**
  * target versionをURLから取り出し、GitHubのbranch名に変換
  */
-const getBranchName = () => {
+const getBranchName = async () => {
     // target versionをURLから取出し
     const v = document.URL.match(/docs\.ansible\.com\/projects\/ansible\/(.*?)\/(modules|plugins|collections)/);
     // console.log(v[1]);
     const collection = (v[2] == "collections")? true: false;
-    const ver = (() => {
+    const ver = await (async () => {
         switch (v[1]) {
         case "devel":
             return "devel";
         case "latest":
-            return (async () => {
-                // console.log("url: latest");
-                const flyout = await waitForFlyout();
-                const shadow = flyout.shadowRoot;
-                const versions = [...shadow.querySelectorAll("dl.versions a")].map(a => (a.textContent.trim()));
-                // 画面右下部分バージョン選択画面内の1個前のバージョン番号値を現バージョンとする
-                /// ※「latest」「番号」「devel」の前提
-                const version = versions.find((elem) => Number(elem));
-                // console.log(version);
-                return "stable-" + ansible_version_table(String(version));
-                // console.log(ver);
-            })();
+            // console.log("url: latest");
+            const flyout = await waitForFlyout();
+            const shadow = flyout.shadowRoot;
+            const versions = [...shadow.querySelectorAll("dl.versions a")].map(a => (a.textContent.trim()));
+            // 画面右下部分バージョン選択画面内の1個前のバージョン番号値を現バージョンとする
+            /// ※「latest」「番号」「devel」の前提
+            const version = versions.find((elem) => Number(elem));
+            // console.log(version);
+            return "stable-" + ansible_version_table(String(version));
+            // console.log(ver);
         default:
             return "stable-" + ansible_version_table(v[1]);
         }
