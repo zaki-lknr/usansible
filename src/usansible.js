@@ -133,6 +133,14 @@ const getCollectionUrl = (branch) => {
         // console.log("m2: " + m[2]);
         // console.log("m3: " + m[3]);
         // console.log("m4: " + m[4]);
+        const external_links = document.getElementsByClassName("external");
+        // console.log(external_links);
+        const link = Array.prototype.slice.call(external_links).filter(i => i.innerHTML.match(/Repository \(Sources\)/));
+        // console.log(link);
+        if (link) {
+            const url = link[0].getAttribute("href");
+            console.log(url);
+        }
 
         if ((m[1]+'.'+m[2]) === 'ansible.builtin') {
             // coreモジュール(base / builtin)の場合
