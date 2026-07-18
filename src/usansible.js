@@ -136,7 +136,7 @@ const getCollectionUrl = (branch) => {
         const external_links = document.getElementsByClassName("external");
         // console.log(external_links);
         const link = Array.prototype.slice.call(external_links).filter(i => i.innerHTML.match(/Repository \(Sources\)/))[0].getAttribute("href");
-        console.log(link);
+        // console.log(link);
 
         if ((m[1]+'.'+m[2]) === 'ansible.builtin') {
             // coreモジュール(base / builtin)の場合
