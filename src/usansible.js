@@ -160,12 +160,12 @@ const getCollectionUrl = (branch) => {
                 // 例えばansible.posix.firewalld module
                 // https://docs.ansible.com/ansible/latest/collections/ansible/posix/firewalld_module.html
                 // https://github.com/ansible-collections/ansible.posix/blob/main/plugins/modules/firewalld.py
-                return link + '/blob/main/plugins/modules/' + m[3] + '.py';
+                return link + '/blob/HEAD/plugins/modules/' + m[3] + '.py';
                 // "module" -> "modules" (sが増えてる)
             }
             else {
                 // module以外はパス名そのまま
-                return link + '/blob/main/plugins/'+ m[4] +'/' + m[3] + '.py';
+                return link + '/blob/HEAD/plugins/'+ m[4] +'/' + m[3] + '.py';
             }
         }
     }
