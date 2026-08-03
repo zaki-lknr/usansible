@@ -148,6 +148,20 @@ const getCollectionUrl = (branch) => {
                 return link + '/blob/' + branch + '/lib/ansible/modules/' + m[3] + '.py';
                 // "module" -> "modules" (sが増えてる)
             }
+            else if (m[4] === 'filter') {
+                const synopsis = document.getElementById("synopsis");
+                // console.log(synopsis);
+                const u = synopsis?.querySelector('a[href^="https://jinja.palletsprojects.com"]')?.href ?? null;
+                if (u) {
+                    // jinja2 filter
+                    console.log("jinja2 filter");
+                    console.log(u);
+                }
+                else {
+                    // builtinのフィルター
+                    console.log("builtin filter");
+                }
+            }
             else {
                 // module以外はパス名そのまま
                 return link + '/blob/' + branch + '/lib/ansible/plugins/'+ m[4] +'/' + m[3] + '.py';
