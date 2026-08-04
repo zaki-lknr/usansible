@@ -159,7 +159,10 @@ const getCollectionUrl = (branch) => {
                 }
                 else {
                     // builtinのフィルター
-                    console.log("builtin filter");
+                    // console.log("builtin filter");
+                    return link + '/blob/' + branch + '/lib/ansible/plugins/filter/core.py';
+                    // 暫定でcore.pyへリンク
+                    // 他のソースは個別に分類されてたりするがdocumentからは判断不能 (e.g. difference -> mathstuff.py)
                 }
             }
             else {
