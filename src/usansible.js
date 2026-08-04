@@ -156,6 +156,7 @@ const getCollectionUrl = (branch) => {
                     // jinja2 filter
                     console.log("jinja2 filter");
                     console.log(u);
+                    return 'https://github.com/pallets/jinja/blob/main/src/jinja2/filters.py';
                 }
                 else {
                     // builtinのフィルター
