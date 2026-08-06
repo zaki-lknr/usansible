@@ -182,6 +182,11 @@ const getCollectionUrl = (branch) => {
                         case "zip":
                         case "zip_longest":
                             return link + '/blob/' + branch + '/lib/ansible/plugins/filter/mathstuff.py';
+
+                        case "vault":
+                        case "unvault":
+                            return link + '/blob/' + branch + '/lib/ansible/plugins/filter/encryption.py';
+
                         default:
                             // その他はcore.pyへリンク
                             return link + '/blob/' + branch + '/lib/ansible/plugins/filter/core.py';
