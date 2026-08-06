@@ -160,10 +160,32 @@ const getCollectionUrl = (branch) => {
                 }
                 else {
                     // builtinのフィルター
-                    // console.log("builtin filter");
-                    return link + '/blob/' + branch + '/lib/ansible/plugins/filter/core.py';
-                    // 暫定でcore.pyへリンク
-                    // 他のソースは個別に分類されてたりするがdocumentからは判断不能 (e.g. difference -> mathstuff.py)
+                    console.log("builtin filter");
+                    console.log(m[3]);
+                    // フィルタ名毎にソースファイル振り分け
+                    // フィルタによっては個別に分類されてたりするがdocumentからは判断不能 (e.g. difference -> mathstuff.py)
+                    switch (m[3]) {
+                        case "log":
+                        case "pow":
+                        case "root":
+                        case "unique":
+                        case "intersect":
+                        case "difference":
+                        case "symmetric_difference":
+                        case "union":
+                        case "product":
+                        case "permutations":
+                        case "combinations":
+                        case "human_readable":
+                        case "human_to_bytes":
+                        case "rekey_on_member":
+                        case "zip":
+                        case "zip_longest":
+                            return link + '/blob/' + branch + '/lib/ansible/plugins/filter/mathstuff.py';
+                        default:
+                            // その他はcore.pyへリンク
+                            return link + '/blob/' + branch + '/lib/ansible/plugins/filter/core.py';
+                    }
                 }
             }
             else {
