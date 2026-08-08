@@ -187,6 +187,13 @@ const getCollectionUrl = (branch) => {
                         case "unvault":
                             return link + '/blob/' + branch + '/lib/ansible/plugins/filter/encryption.py';
 
+                        case "urldecode":
+                            // urlencodeはjinja2 filter
+                            return link + '/blob/' + branch + '/lib/ansible/plugins/filter/urls.py';
+
+                        case "urlsplit":
+                            return link + '/blob/' + branch + '/lib/ansible/plugins/filter/urlsplit.py';
+
                         default:
                             // その他はcore.pyへリンク
                             return link + '/blob/' + branch + '/lib/ansible/plugins/filter/core.py';
