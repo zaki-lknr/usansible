@@ -154,14 +154,11 @@ const getCollectionUrl = (branch) => {
                 const u = synopsis?.querySelector('a[href^="https://jinja.palletsprojects.com"]')?.href ?? null;
                 if (u) {
                     // jinja2 filter
-                    console.log("jinja2 filter");
-                    console.log(u);
+                    // console.log(u);
                     return 'https://github.com/pallets/jinja/blob/main/src/jinja2/filters.py';
                 }
                 else {
                     // builtinのフィルター
-                    console.log("builtin filter");
-                    console.log(m[3]);
                     // フィルタ名毎にソースファイル振り分け
                     // フィルタによっては個別に分類されてたりするがdocumentからは判断不能 (e.g. difference -> mathstuff.py)
                     switch (m[3]) {
