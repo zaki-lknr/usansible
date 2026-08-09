@@ -148,6 +148,55 @@ const getCollectionUrl = (branch) => {
                 return link + '/blob/' + branch + '/lib/ansible/modules/' + m[3] + '.py';
                 // "module" -> "modules" (sが増えてる)
             }
+            else if (m[4] === 'filter') {
+                const synopsis = document.getElementById("synopsis");
+                // console.log(synopsis);
+                const u = synopsis?.querySelector('a[href^="https://jinja.palletsprojects.com"]')?.href ?? null;
+                if (u) {
+                    // jinja2 filter
+                    // console.log(u);
+                    return 'https://github.com/pallets/jinja/blob/main/src/jinja2/filters.py';
+                }
+                else {
+                    // builtinのフィルター
+                    // フィルタ名毎にソースファイル振り分け
+                    // フィルタによっては個別に分類されてたりするがdocumentからは判断不能 (e.g. difference -> mathstuff.py)
+                    switch (m[3]) {
+                        case "log":
+                        case "pow":
+                        case "root":
+                        case "unique":
+                        case "intersect":
+                        case "difference":
+                        case "symmetric_difference":
+                        case "union":
+                        case "product":
+                        case "permutations":
+                        case "combinations":
+                        case "human_readable":
+                        case "human_to_bytes":
+                        case "rekey_on_member":
+                        case "zip":
+                        case "zip_longest":
+                            return link + '/blob/' + branch + '/lib/ansible/plugins/filter/mathstuff.py';
+
+                        case "vault":
+                        case "unvault":
+                            return link + '/blob/' + branch + '/lib/ansible/plugins/filter/encryption.py';
+
+                        case "urldecode":
+                            // urlencodeはjinja2 filter
+                            return link + '/blob/' + branch + '/lib/ansible/plugins/filter/urls.py';
+
+                        case "urlsplit":
+                            return link + '/blob/' + branch + '/lib/ansible/plugins/filter/urlsplit.py';
+
+                        default:
+                            // その他はcore.pyへリンク
+                            return link + '/blob/' + branch + '/lib/ansible/plugins/filter/core.py';
+                    }
+                }
+            }
             else {
                 // module以外はパス名そのまま
                 return link + '/blob/' + branch + '/lib/ansible/plugins/'+ m[4] +'/' + m[3] + '.py';
