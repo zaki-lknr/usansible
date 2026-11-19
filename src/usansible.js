@@ -55,6 +55,8 @@ const ansible_version_table = (version) => {
         return "2.20";
     case "14":
         return "2.21";
+    case "15":
+        return "2.22";
     default:
         return version;
     }
